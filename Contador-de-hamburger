@@ -25,10 +25,10 @@ void main(void) {
         if(PORTAbits.RA0 == 0) { // Se o botão A0 for pressionado
            
             contador++;
-            PORTB = Digito[contador]; //irá colocar o número de hambúrgeres
+            PORTB = Digito[contador]; //irá colocar o número de hambúrgueres
             
         }
-        while (contador >= 5){ //enquanto o n de hamburgeres passar de 5
+        while (contador >= 5){ //enquanto o n de hamburgueres passar de 5
             PORTAbits.RA2 = 1; //o led de aviso acende
              if(PORTAbits.RA1) { // Se o botão A1 for solto
            
