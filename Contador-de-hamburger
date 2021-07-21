@@ -1,0 +1,46 @@
+#define _XTAL_FREQ  4000000
+
+#include <xc.h>
+
+
+char Digito[]= { // Dados em binario para melhor visualização
+                63,// Digito 0 (0b00111111)
+                6,// Digito 1 (0b00000110)
+                91,// Digito 2 (0b01011011)
+                79,// Digito 3 (0b01001111)
+                102,// Digito 4 (0b01100110)
+                109,// Digito 5 (0b01101101)
+                };
+
+
+void main(void) {
+    TRISA = 3;
+    TRISB = 0;
+    PORTA = 4;
+    
+    int contador = 0;
+    
+    while (1){
+
+        if(PORTAbits.RA0 == 0) { // Se o botão A0 for pressionado
+           
+            contador++;
+            PORTB = Digito[contador]; //irá colocar o número de hambúrgeres
+            
+        }
+        while (contador >= 5){ //enquanto o n de hamburgeres passar de 5
+            PORTAbits.RA2 = 1; //o led de aviso acende
+             if(PORTAbits.RA1) { // Se o botão A1 for solto
+           
+                contador = 0; //reseta o contador
+                PORTB = Digito[contador]; //zera no circuito
+                __delay_ms(500);
+                PORTAbits.RA2 = 0; //apaga o led de aviso
+            }
+            
+        }
+        
+       __delay_ms(500); 
+    }
+    return;
+}
